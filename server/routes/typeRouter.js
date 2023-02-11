@@ -1,9 +1,10 @@
 const Router = require('express'); // import router from express
+const typeController = require('../controllers/typeController');
 const router = new Router(); // to create a new object from this router 
 
 // указываем все необходимые запросы
-router.post('/', ) // создание типа
-router.get('/',) // получение всех типов
+router.post('/', typeController.create) // создание типа
+router.get('/', typeController.getAll) // получение всех типов
 // попробовать создать метод DELETE
 
 
