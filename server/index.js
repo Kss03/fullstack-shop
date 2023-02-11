@@ -4,6 +4,7 @@ const sequelize = require ('./db'); // import objecct from db.js
 const models = require('./models/models'); // import database models
 const cors = require('cors'); // import cors function from cors package
 const router = require('./routes/index'); // import routers
+const errorHandler = require('./middleware/ErrorHandingMiddleware'); // import middleware
 
 
 const PORT = process.env.PORT || 5000; //import PORT from .env or 5000
@@ -12,6 +13,11 @@ const app = express(); // object declaration usage express function
 app.use(cors()); // передаем функцию cors в функцию use, которую вызываем у app
 app.use(express.json()); // передаем в app.use() express.json(), чтобы наше приложение могло парсить json
 app.use('/api', router); // 1 параметр: url по которому router должен обрабатываться, 2 пар-р: сам роутер
+
+// указываем замыкающий middleware, которым возвращаем ответ на клиент ! обязательно указывем последним !
+app.use(errorHandler);
+
+
 
 
 const start = async () => { // вызов функции для подключения к бд, async делает функцию асинхронной т.к. все операцции с бд являются асинхронными 
